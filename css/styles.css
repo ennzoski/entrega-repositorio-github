@@ -12,35 +12,7 @@ h1{
     text-align: center;
 }
 
-/* ESTILOS PARA CLASS . */
-
-
-.lista-navegacion ul {
-    list-style: none;
-    text-align: center;
-    background-color: #3fa7a7;
-    padding: 10px;
-}
-
-.lista-navegacion li{
-    display: inline-block;
-}
-
-
-.lista-navegacion li a {
-color: #fff;
-text-decoration: none;
-width: 100px;
-display: block;
-}
-
-/* TRANSICIONES MENÚ */
-
-.lista-navegacion li a:hover {
-    color:#3fa7a7;
-    background-color: #fff;
-}
-
+/* ESTILOS PARA CLASS */ 
 
 .bajada-presentacion {
     font-style: italic;
