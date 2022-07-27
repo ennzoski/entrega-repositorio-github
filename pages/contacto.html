@@ -14,7 +14,7 @@
 </head>
 <body>
 
-    <div class="grid-container">
+<div class="grid-container">
 
     
     <header>
@@ -57,49 +57,36 @@
 
         </section>
 
-        <section id="imagen">
+ <section id="formulario" class="container align-items-center">
 
-            <form>
-    
-                <fieldset>
-    
-                <div>
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre">
-                </div>
-                
-                <div>
-                <label for="correo">Correo</label>
-                <input type="email" id="correo">
-                </div>
-    
-                <div>
-                <label for="tel">Teléfono</label>
-                <input type="tel" id="tel">
-                </div>
-    
-                <div>
-                <label for="mensaje">Mensaje</label>
-                <textarea name="" id="mensaje" cols="30" rows="10"></textarea>
-                </div>
-    
-                <input type="submit" value="Enviar Formulario">
-    
-                <input type="reset" value="Limpiar Formulario">
-    
-            </fieldset>
-    
-            </form>
+  <form>
+    <div class="mb-3">
+      <div class="mb-3">
+        <label for="exampleInputNombre1" class="form-label">Nombre</label>
+        <input type="Nombre" class="form-control" id="exampleInputNombre1">
+      </div>
+      <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">Nunca compartiremos su correo electrónico con nadie más.</div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputMensaje1" class="form-label">Mensaje</label>
+      <input type="mensaje" class="form-control" id="exampleInputMensaje1">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">No soy un robot</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
 
-        </section>
+ </section>
 
-    
-
-    <footer class="pie-pagina">
+  <footer class="pie-pagina">
         <p>Copyright &copy; 2022</p>
     </footer>
 
- </div>
+</div>
 
  <script src="../bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
 
