@@ -33,6 +33,8 @@ h1{
 
 .pie-pagina {
     text-align: center;
+    background-color: $color-titulos ;
+    color: white
 }
 
 
@@ -49,17 +51,4 @@ h1{
 
 img {
     max-width: 100%;
-}
-
-#galeria .col-lg-4 {
-    margin: 0 !important;
-    padding: 25px;
-}
-
-#galeria img {
-    width: 100%;
-}
-
-#galeria img:hover {
-border: 5px solid #ffffff;
 }

@@ -40,6 +40,8 @@ h1 {
 
 .pie-pagina {
   text-align: center;
+  background-color: #3fa7a7;
+  color: white;
 }
 
 /* ESTILOS PARA LOS ID # */
@@ -53,19 +55,6 @@ h1 {
 
 img {
   max-width: 100%;
-}
-
-#galeria .col-lg-4 {
-  margin: 0 !important;
-  padding: 25px;
-}
-
-#galeria img {
-  width: 100%;
-}
-
-#galeria img:hover {
-  border: 5px solid #ffffff;
 }
 
 /*# sourceMappingURL=styles.css.map */
