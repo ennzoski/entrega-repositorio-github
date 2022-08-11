@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ESTILOS GALERIA */
 #galeria .col-lg-4 {
   margin: 0 !important;
@@ -27,15 +28,16 @@ h1 {
 }
 
 /* ESTILOS PARA CLASS */
-.bajada-presentacion {
+.bajada-presentacion, .pronto-info {
   font-style: italic;
   text-align: center;
 }
 
+/* EXTEND */
 .pronto-info {
   font-family: sans-serif;
+  font-style: normal;
   font-size: 25px;
-  text-align: center;
 }
 
 .pie-pagina {
@@ -44,17 +46,21 @@ h1 {
   color: white;
 }
 
-/* ESTILOS PARA LOS ID # */
-#presentacion {
-  background-color: rgb(217, 224, 233);
+/* MIXIN CON PARÁMETROS */
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #imagen {
+  max-width: 100%;
+  max-height: 100%;
   text-align: center;
 }
 
-img {
-  max-width: 100%;
+/* ESTILOS PARA LOS ID # */
+#presentacion {
+  background-color: rgb(217, 224, 233);
 }
 
 /*# sourceMappingURL=styles.css.map */
