@@ -39,9 +39,9 @@ while(elegirColor.toUpperCase() != "ESC"){
         calcularPrecio(cantidadCalcetines, producto3.precio)
     }
     else{
-        alert("Si no desea comprar nada más escriba ESC")
+        alert("No tenemos ese color disponible.")
     }
-    elegirColor = prompt("¿Qué otro color de calcetín le gustaría comprar? \n Si no desea comprar más, escriba ESC para ver el total y salir.")
+    elegirColor = prompt("¿Qué otro color de calcetín le gustaría comprar? \n - Blanco $5.000 \n - Verde $4.500 \n - Azul $6.000 \n Si no desea comprar más, escriba ESC para ver el total y salir.")
 }
 
 if(precioTotal != 0){
