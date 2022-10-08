@@ -1,65 +1,51 @@
-/* Colores de calcetines disponibles */
+/* Ecommerce de calcetines compresivos - Colores disponibles a la venta */
 
 function saludo(mensaje){
-    alert("Gracias por visitarnos" + mensaje)
+    alert("Gracias por visitar Calcetines Compresivos" + mensaje)
 }
 
 saludo("")
 
-let nombreProductoA = 'Blanco'
-let precioProductoA = 5000
-let stockProductoA = 25
+alert("Estos colores de calcetines tenemos disponibles: \n - Blanco $5.000 \n - Verde $4.500 \n - Azul $6.000 \n Presione ACEPTAR para continuar con la compra. \n Cuando ya no quiera comprar más escriba ESC.")
 
-let nombreProductoB = 'Verde'
-let precioProductoB = 4500
-let stockProductoB = 30
+function Productos(nombre, precio){
+    this.nombre = nombre;
+    this.precio = precio;
+}   
 
-let nombreProductoC = 'Azul'
-let precioProductoC = 6000
-let stockProductoC = 15
+let producto1 = new Productos ("Blanco", 5000);
+let producto2 = new Productos ("Verde", 4500);
+let producto3 = new Productos ("Azul", 6000);
 
-let productoCompra = prompt("Ingrese que color de calcetin quiere comprar:\n - Blanco\n - Verde\n - Azul")
 let precioTotal = 0
 
-
- if(productoCompra.toUpperCase() == 'BLANCO'){
-    let cantidadProductoBlanco = prompt("ingrese cuantos pares de calcetin de color " + nombreProductoA + " desea comprar:")
-    if(cantidadProductoBlanco <= stockProductoA){
-        precioTotal = cantidadProductoBlanco * precioProductoA
-    }
-    else{
-        alert("Actualmente tenemos " + stockProductoA + " unidades de este producto")
-    }
+function calcularPrecio(cantidad, precio){
+    precioTotal += (cantidad * precio)
 }
 
-else if(productoCompra.toUpperCase() == 'VERDE'){
-    let cantidadProductoVerde = prompt("ingrese cuantos pares de calcetin de color " + nombreProductoB + " desea comprar:")
-    if(cantidadProductoVerde <= stockProductoB){
-        precioTotal = cantidadProductoVerde * precioProductoB
+let elegirColor = prompt("¿Qué color de calcetín le gustaría comprar? \n Si no desea comprar escriba ESC para salir.")
+while(elegirColor.toUpperCase() != "ESC"){
+    let cantidadCalcetines = prompt("¿Cuántos pares de color " + elegirColor + " le gustaría comprar?")
+    if(elegirColor.toUpperCase() == "BLANCO"){
+        let totalBlanco = alert("El total a pagar de calcetines blancos es: " + cantidadCalcetines * producto1.precio)
+        calcularPrecio(cantidadCalcetines, producto1.precio)
+    }
+    else if(elegirColor.toUpperCase() == "VERDE"){
+        let totalVerde = alert("El total a pagar de calcetines verdes es: " + cantidadCalcetines * producto2.precio)
+        calcularPrecio(cantidadCalcetines, producto2.precio)
+    }
+    else if(elegirColor.toUpperCase() == "AZUL"){
+        let totalAzul = alert("El total a pagar de calcetines azules es: " + cantidadCalcetines * producto3.precio)
+        calcularPrecio(cantidadCalcetines, producto3.precio)
     }
     else{
-        alert("Actualmente tenemos " + stockProductoB + " unidades de este producto")
+        alert("Si no desea comprar nada más escriba ESC")
     }
-}
-
-else if(productoCompra.toUpperCase() == 'AZUL'){
-    let cantidadProductoAzul = prompt("ingrese cuantos pares de calcetin de color " + nombreProductoC + " desea comprar:")
-    if(cantidadProductoAzul <= stockProductoC){
-        precioTotal = cantidadProductoAzul * precioProductoC
-    }
-    else{
-        alert("Actualmente tenemos " + stockProductoC + " unidades de este producto")
-    }
-}
-
-else{
-    alert("No tenemos ese producto a la venta")
+    elegirColor = prompt("¿Qué otro color de calcetín le gustaría comprar? \n Si no desea comprar más, escriba ESC para ver el total y salir.")
 }
 
 if(precioTotal != 0){
-    alert("El precio total es: " + precioTotal)
+    alert("El precio total de todos los calcetines es " + precioTotal)
 }
 
-saludo(", vuelve pronto :)")
-
-//alert("Gracias por su visita")
+saludo(", vuelva pronto :)")
