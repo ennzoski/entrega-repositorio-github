@@ -1,51 +1,177 @@
 /* Ecommerce de calcetines compresivos - Colores disponibles a la venta */
 
-function saludo(mensaje){
-    alert("Gracias por visitar Calcetines Compresivos" + mensaje)
+// function saludo(mensaje) {
+//     alert("Gracias por visitar Calcetines Compresivos" + mensaje)
+// }
+
+// saludo("")
+
+productos = [
+    {
+        "id":1,
+        "nombre": "Amarillo",
+        "precio": "1000",
+        "stock": 10,
+        "img": "amarillo.png"
+    },
+    {
+        "id":2,
+        "nombre": "Celeste",
+        "precio": "500",
+        "stock": 10,
+        "img": "celeste.png"
+    },
+    {
+        "id":3,
+        "nombre": "Naranjo",
+        "precio": "3990",
+        "stock": 10,
+        "img": "naranjo.png"
+    },
+    {
+        "id":4,
+        "nombre": "Verde",
+        "precio": "4990",
+        "stock": 10,
+        "img": "verde.png"
+    }
+]
+
+//////////// Crea un catalogo y se llena con los productos de arriba//////////////////
+
+let catalogo = document.getElementById("catalogo")
+function rederizar(lista) {
+    catalogo.innerHTML = ""
+    for (const prod of lista) {
+        let card = document.createElement("div")
+        card.className = "card"
+        card.innerHTML = `<div class="card" style="width: 18rem;">
+        <img src=img/${prod.img} class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${prod.nombre}</h5>
+            <p>Precio: $${prod.precio}</p>
+            </div>
+        </div>`
+
+
+    let cardButton = document.createElement("button")
+    cardButton.classList.add('btn', 'btn-primary')
+    cardButton.innerText = `Comprar`
+    cardButton.setAttribute('mark', prod.id)
+    cardButton.setAttribute('name', prod.nombre)
+    cardButton.addEventListener('click', agregarAlCarrito)
+    card.append(cardButton);
+        catalogo.append(card)
+    }
+}
+rederizar(productos)
+
+
+
+////////////Inicio de Variables ///
+
+let catalog = document.getElementById('items')
+let cartList = document.getElementById('carrito')
+let buttonEmpty = document.getElementById('boton-vaciar')
+let totalValue = document.getElementById('total')
+let cart = []
+
+buttonEmpty.addEventListener('click', emptyButtonHandler)
+
+loadCartFromStorage()
+
+
+//////////////////////// Funcion agregar al carrito/////////
+
+function agregarAlCarrito(event){
+    let id = event.target.getAttribute('mark')
+    let name = event.target.getAttribute('name')
+    cart.push(id)
+    mostrarCarro()
+
+    Toastify({
+        text: `Agregaste correctamente el calcetín ${name} al carrito`,
+        className: "success",
+        duration: 3000,
+        gravity: 'bottom',
+        position: "right",
+      }).showToast();
 }
 
-saludo("")
 
-alert("Estos colores de calcetines tenemos disponibles: \n - Blanco $5.000 \n - Verde $4.500 \n - Azul $6.000 \n Presione ACEPTAR para continuar con la compra. \n Cuando ya no quiera comprar más escriba ESC.")
+function mostrarCarro(){
 
-function Productos(nombre, precio){
-    this.nombre = nombre;
-    this.precio = precio;
-}   
+    saveCartToStorage()
 
-let producto1 = new Productos ("Blanco", 5000);
-let producto2 = new Productos ("Verde", 4500);
-let producto3 = new Productos ("Azul", 6000);
+    cartList.innerHTML = ''
 
-let precioTotal = 0
+    let cartWithoutRepeatedElements = [...new Set(cart)]
 
-function calcularPrecio(cantidad, precio){
-    precioTotal += (cantidad * precio)
+    cartWithoutRepeatedElements.forEach((itemId) => {
+        let item = productos.filter((producto) => {
+            return producto.id === parseInt(itemId)
+        })
+        let quantity = cart.reduce((total, id) => {
+            return id === itemId ? total += 1 : total
+        }, 0)
+    
+
+    let linea = document.createElement('li')
+    linea.classList.add('list-group-item', 'text-right', 'mx-2')
+    linea.innerText = `${quantity} x ${item[0].nombre} - $${item[0].precio}`
+
+    let buttonDelete = document.createElement('button')
+    buttonDelete.classList.add('btn', 'btn-danger', 'mx-5')
+    buttonDelete.innerText = 'X'
+    buttonDelete.dataset.item = itemId
+    buttonDelete.addEventListener('click', eliminarProducto)
+
+    linea.append(buttonDelete)
+    cartList.append(linea)
+    })
+
+    totalValue.innerText = calculateTotalPrice()
 }
 
-let elegirColor = prompt("¿Qué color de calcetín le gustaría comprar? \n Si no desea comprar escriba ESC para salir.")
-while(elegirColor.toUpperCase() != "ESC"){
-    let cantidadCalcetines = prompt("¿Cuántos pares de color " + elegirColor + " le gustaría comprar?")
-    if(elegirColor.toUpperCase() == "BLANCO"){
-        let totalBlanco = alert("El total a pagar de calcetines blancos es: " + cantidadCalcetines * producto1.precio)
-        calcularPrecio(cantidadCalcetines, producto1.precio)
-    }
-    else if(elegirColor.toUpperCase() == "VERDE"){
-        let totalVerde = alert("El total a pagar de calcetines verdes es: " + cantidadCalcetines * producto2.precio)
-        calcularPrecio(cantidadCalcetines, producto2.precio)
-    }
-    else if(elegirColor.toUpperCase() == "AZUL"){
-        let totalAzul = alert("El total a pagar de calcetines azules es: " + cantidadCalcetines * producto3.precio)
-        calcularPrecio(cantidadCalcetines, producto3.precio)
-    }
-    else{
-        alert("No tenemos ese color disponible.")
-    }
-    elegirColor = prompt("¿Qué otro color de calcetín le gustaría comprar? \n - Blanco $5.000 \n - Verde $4.500 \n - Azul $6.000 \n Si no desea comprar más, escriba ESC para ver el total y salir.")
+
+
+function eliminarProducto(event){
+    let id = event.target.dataset.item
+    cart = cart.filter((cartId) => {
+       return cartId != id
+    })
+    mostrarCarro()
+
+
+    Swal.fire({
+       title: "Eliminaste correctamente el producto!",
+       icon: 'warning'
+    })
+    
+   }
+   
+
+function emptyButtonHandler(){
+    cart = []
+    cartList.innerHTML = ''
+    totalValue.innerText = 0
 }
 
-if(precioTotal != 0){
-    alert("El precio total de todos los calcetines es " + precioTotal)
+function calculateTotalPrice(){
+    return cart.reduce((total, itemId) => {
+        let item = productos.filter((producto) => {
+            return producto.id === parseInt(itemId)
+        })
+        return total + parseInt(item[0].precio)
+    }, 0)
 }
 
-saludo(", vuelva pronto :)")
+function saveCartToStorage(){
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
+
+function loadCartFromStorage(){
+    if(localStorage.getItem('cart') !== null){
+        cart = JSON.parse(localStorage.getItem('cart'))
+    }
+}
