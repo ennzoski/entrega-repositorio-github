@@ -107,6 +107,12 @@ h1 {
   text-align: center;
 }
 
+.botonAgregar {
+  text-align: center;
+  background-color: #3fa7a7;
+  color: white;
+}
+
 /* EXTEND */
 .pronto-info {
   font-family: sans-serif;

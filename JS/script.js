@@ -1,10 +1,6 @@
 /* Ecommerce de calcetines compresivos - Colores disponibles a la venta */
 
-// function saludo(mensaje) {
-//     alert("Gracias por visitar Calcetines Compresivos" + mensaje)
-// }
-
-// saludo("")
+// ARRAYS
 
 productos = [
     {
@@ -54,8 +50,8 @@ function rederizar(lista) {
         </div>`
 
 
-    let cardButton = document.createElement("button")
-    cardButton.classList.add('btn', 'btn-primary')
+    let cardButton = document.createElement("a")
+    cardButton.classList.add('btn', 'botonAgregar')
     cardButton.innerText = `Comprar`
     cardButton.setAttribute('mark', prod.id)
     cardButton.setAttribute('name', prod.nombre)
@@ -79,6 +75,7 @@ let cart = []
 buttonEmpty.addEventListener('click', emptyButtonHandler)
 
 loadCartFromStorage()
+mostrarCarro()
 
 
 //////////////////////// Funcion agregar al carrito/////////
@@ -133,7 +130,7 @@ function mostrarCarro(){
     totalValue.innerText = calculateTotalPrice()
 }
 
-
+// Funcion eliminar carro
 
 function eliminarProducto(event){
     let id = event.target.dataset.item
@@ -155,7 +152,10 @@ function emptyButtonHandler(){
     cart = []
     cartList.innerHTML = ''
     totalValue.innerText = 0
+    mostrarCarro()
 }
+
+// Funcion calcular precio
 
 function calculateTotalPrice(){
     return cart.reduce((total, itemId) => {
@@ -165,6 +165,8 @@ function calculateTotalPrice(){
         return total + parseInt(item[0].precio)
     }, 0)
 }
+
+// Funcion localStorage
 
 function saveCartToStorage(){
     localStorage.setItem('cart', JSON.stringify(cart))
